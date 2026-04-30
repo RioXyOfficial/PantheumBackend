@@ -1,6 +1,0 @@
-@PantheumBackend_HostAddress = http://localhost:5056
-
-GET {{PantheumBackend_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
