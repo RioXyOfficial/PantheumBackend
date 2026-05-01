@@ -13,4 +13,5 @@ public class DatabaseHelper
     {
         return new MySqlConnection(_connectionString);
     }
+    
 }
