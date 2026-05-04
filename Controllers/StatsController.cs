@@ -19,6 +19,12 @@ public class StatsController : ControllerBase
         using var conn = _db.GetConnection();
         await conn.OpenAsync();
 
+        // Vérifier que le joueur existe
+        var check = new MySqlCommand("SELECT COUNT(*) FROM users WHERE id=@uid", conn);
+        check.Parameters.AddWithValue("@uid", req.UserId);
+        var count = Convert.ToInt32(await check.ExecuteScalarAsync());
+        if (count == 0) return NotFound("Joueur introuvable.");
+
         var cmd = new MySqlCommand(@"
             INSERT INTO statistics (user_id, games_played, victories, playtime)
             VALUES (@uid, 1, @vic, @time)
